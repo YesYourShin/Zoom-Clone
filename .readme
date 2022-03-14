@@ -2,7 +2,7 @@ Zoom Clone
 강의 참고 사이트 
 https://nomadcoders.co/noom/lobby
 
-1.6까지 했음
+1.8까지 했음 (아직 닉네임 표시가 잘 안 됨)
 
 실행
 npm run dev 
