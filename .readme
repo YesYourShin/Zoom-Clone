@@ -2,8 +2,13 @@ Zoom Clone
 강의 참고 사이트 
 https://nomadcoders.co/noom/lobby
 
-1.8까지 했음 (아직 닉네임 표시가 잘 안 됨)
-
 실행
 npm run dev 
 
+
+
+socket.io로 변경
+클라이언트에서 자동 생성
+http://localhost:3000/socket.io/socket.io.js
+
+콘솔로그에 io = io()하면 확인가능

@@ -12,11 +12,7 @@ socket.addEventListener('open', () => {
     console.log('Connected to Server');
 });
 
-socket.addEventListener('message', message => {
-    const li = document.createElement('li');
-    li.innerText = message.data;
-    messageList.append(li);
-});
+socket.addEventListener('message', message => {});
 
 socket.addEventListener('close', () => {
     console.log('Disconnected from Server');
@@ -26,6 +22,9 @@ function handleSubmit(event) {
     event.preventDefault();
     const input = messageForm.querySelector('input');
     socket.send(makeMessage('new_message', input.value));
+    const li = document.createElement('li');
+    li.innerText = `You: ${input.value}`;
+    messageList.append(li);
     input.value = '';
 }
 
