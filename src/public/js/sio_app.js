@@ -42,7 +42,6 @@ socket.on('bye', user => {
 });
 
 const messageForm = room.querySelector('#message');
-
 messageForm.addEventListener('submit', event => {
     event.preventDefault();
     const input = messageForm.querySelector('input');
