@@ -18,6 +18,7 @@ const handleListen = () => console.log(`Socket IO Server is Listening on http://
 server.listen(3000, handleListen);
 
 sioServer.on('connection', socket => {
+    socket['nickname'] = 'Anonymous';
     // console.log(socket);
     socket.onAny(event => {
         console.log(`Socket Event: ${event}`);
@@ -32,16 +33,20 @@ sioServer.on('connection', socket => {
         // }, 3000);
         done();
 
-        socket.to(roomName).emit('welcome');
+        socket.to(roomName).emit('welcome', socket.nickname);
     });
     socket.on('disconnecting', () => {
         socket.rooms.forEach(aRoom => {
-            socket.to(aRoom).emit('bye');
+            socket.to(aRoom).emit('bye', socket.nickname);
         });
     });
 
     socket.on('new_message', (msg, room, done) => {
-        socket.to(room).emit('new_message', msg);
+        socket.to(room).emit('new_message', `${socket.nickname} : ${msg}`);
         done();
+    });
+
+    socket.on('nickname', nickName => {
+        socket['nickname'] = nickName;
     });
 });

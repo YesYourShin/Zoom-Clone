@@ -33,15 +33,15 @@ function addMessage(msg) {
     ul.appendChild(li);
 }
 
-socket.on('welcome', () => {
-    addMessage('Somebody joined!');
+socket.on('welcome', user => {
+    addMessage(`${user} joined the room!`);
 });
 
-socket.on('bye', () => {
-    addMessage('Somebody left');
+socket.on('bye', user => {
+    addMessage(`${user} left the room`);
 });
 
-const messageForm = room.querySelector('form');
+const messageForm = room.querySelector('#message');
 
 messageForm.addEventListener('submit', event => {
     event.preventDefault();
@@ -51,6 +51,14 @@ messageForm.addEventListener('submit', event => {
         addMessage(`You : ${message}`);
     });
     input.value = '';
+});
+
+const nickNameForm = document.querySelector('#nick');
+nickNameForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const nickInput = nickNameForm.querySelector('#input');
+    const nickName = nickInput.value;
+    socket.emit('nickname', nickName);
 });
 
 socket.on('new_message', addMessage); // (msg) => {addMessage(msg);}
